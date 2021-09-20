@@ -3,7 +3,7 @@ import MainBox from "../components/QuestionBox.component";
 
 function QuestionPage(props) {
     return (
-        <MainBox/>
+        <MainBox history={props.history}/>
     );
 }
 

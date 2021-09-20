@@ -1,7 +1,7 @@
 import { SET_SCORE, SET_USER, UPDATE_USER_LIST } from "../actions/actionNames";
 
 const userReducer = (
-  state = { name: "", score: 0, userList: [{ name: "", score: 0, time: "" }] },
+  state = { name: "", score: 0, userList: [] },
   action
 ) => {
   switch (action.type) {

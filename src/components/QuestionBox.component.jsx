@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { questions } from "../data/tempData";
-import { Link } from "react-router-dom";
 import { shuffle } from "../helpers/shuffler";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../store";
 
-export default function MainBox() {
+export default function MainBox(props) {
+    const userState = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    const AC = bindActionCreators(actionCreators, dispatch);
+
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
@@ -25,6 +32,11 @@ export default function MainBox() {
       setShowScore(true);
     }
   };
+
+  const handleClick = () => {
+    AC.updateUserList({name: userState.name, score: score, time: `${currMin}:${currSec}`});
+    props.history.push("/")
+  }
 
   
 
@@ -68,7 +80,8 @@ export default function MainBox() {
           {showScore ? (
             <div className="score-section">
               Вы ответили правильно на {score} вопросов из {questionList.length}
-              <Link to="/">Home</Link>
+              {/* <Link to="/">Home</Link> */}
+              <button onClick={handleClick}>На главную страницу</button>
             </div>
           ) : (
             <>

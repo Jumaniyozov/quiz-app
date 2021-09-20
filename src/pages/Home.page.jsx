@@ -13,7 +13,6 @@ export default function HomePage(props) {
     evt.preventDefault();
     if (userName.length > 0 && userName.trim() !== "") {
       AC.setUserName(userName);
-      AC.updateUserList(userName);
       props.history.push("/questions");
     }
   };
@@ -23,11 +22,36 @@ export default function HomePage(props) {
       <div className="app2">
         <h3>Таблица лидеров</h3>
         <div>
-          <ol>
-            {state.user.userList.sort().slice(0, 5).map(user => {
-              return (<li>{`${user}`}</li>)
-            })}
-          </ol>
+          <table>
+            <tr>
+              <th>№</th>
+              <th>Имя</th>
+              <th>Очки</th>
+              <th>Время</th>
+            </tr>
+            {state.user.userList
+              .sort((first, second) => {
+                if (first.score > second.score) {
+                  return -1;
+                }
+                if (first.score < second.score) {
+                  return 1;
+                }
+                return 0;
+              })
+              .slice(0, 5)
+              .map((user, index) => {
+                return (
+                  <tr>
+                    <th>{`${index + 1}`}</th>
+                    <th>{`${user.name}`}</th>
+                    <th>{`${user.score}`}</th>
+                    <th>{`${user.time}`}</th>
+                  </tr>
+                );
+              })}
+          </table>
+          <ol></ol>
         </div>
       </div>
 
