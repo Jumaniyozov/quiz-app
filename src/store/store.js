@@ -8,7 +8,7 @@ import reduxThunk from "redux-thunk";
 const middleware = [reduxThunk,];
 
 const loadState = () => {
-  try { // It's also possible to use other local storage if it doesn't support localStorage
+  try {
     const serializedState = localStorage.getItem('state');
     if (serializedState === null) {
       return undefined;

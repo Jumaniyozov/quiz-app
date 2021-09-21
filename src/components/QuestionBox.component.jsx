@@ -4,6 +4,8 @@ import {shuffle} from "../helpers/shuffler";
 import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
 import {actionCreators} from "../store";
+import QuestionResultShowComponent from "./QuestionResultShow.component";
+import QuestionFieldComponent from "./QuestionField.component";
 
 export default function MainBox(props) {
     const userState = useSelector((state) => state.user);
@@ -22,7 +24,6 @@ export default function MainBox(props) {
         if (isCorrect) {
             setScore(score + 1);
         }
-
         const nextQuestion = currentQuestion + 1;
         if (nextQuestion < questionList.length) {
             setCurrentQuestion(nextQuestion);
@@ -80,45 +81,19 @@ export default function MainBox(props) {
             ) : (
                 <>
                     {showScore ? (
-                        <div className="score-section">
-                            Вы ответили правильно на {score} вопросов из {questionList.length}
-                            {/* <Link to="/">Home</Link> */}
-                            <button onClick={handleClick}>На главную страницу</button>
-                        </div>
+                        <QuestionResultShowComponent score={score} questionList={questionList} onClick={handleClick}/>
                     ) : (
-                        <>
-                            <div className="question-section">
-                                <div className="question--text__section">
-                                    <div className="question-count">
-                                        <span>Вопрос {currentQuestion + 1}</span>/
-                                        {questionList.length}
-                                    </div>
-                                    <div className="question-text">
-                                        {questionList[currentQuestion].questionText}
-                                    </div>
-                                </div>
-                                <div className="question--time__section">
-                                    <p>
-                                        <span id="seconds">{`${currMin}`}</span>:
-                                        <span id="tens">{`${currSec}`}</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="answer-section">
-                                {questionList[currentQuestion].answerOptions.map(
-                                    (answerOption, index) => (
-                                        <button
-                                            key={index}
-                                            onClick={() =>
-                                                handleAnswerOptionClick(answerOption.isCorrect)
-                                            }
-                                        >
-                                            {answerOption.answerText}
-                                        </button>
-                                    )
-                                )}
-                            </div>
-                        </>
+                        <QuestionFieldComponent currentQuestion={currentQuestion} questionList={questionList} currMin={currMin}
+                                       currSec={currSec} callbackfn={(answerOption, index) => (
+                            <button
+                                key={index}
+                                onClick={() =>
+                                    handleAnswerOptionClick(answerOption.isCorrect)
+                                }
+                            >
+                                {answerOption.answerText}
+                            </button>
+                        )}/>
                     )}
                 </>
             )}
