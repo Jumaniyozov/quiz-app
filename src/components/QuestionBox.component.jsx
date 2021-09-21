@@ -11,7 +11,7 @@ export default function MainBox(props) {
     const userState = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const AC = bindActionCreators(actionCreators, dispatch);
-    let secInterval = null;
+    const secInterval = React.useRef(null)
 
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [showScore, setShowScore] = useState(false);
@@ -43,7 +43,7 @@ export default function MainBox(props) {
     };
 
     useEffect(() => {
-        secInterval = setInterval(() => {
+        secInterval.current = setInterval(() => {
             setCurrSec((prevState) => prevState + 1);
         }, 1000);
     }, []);
@@ -56,7 +56,7 @@ export default function MainBox(props) {
     }, [currSec]);
 
     useEffect(() => () => {
-        clearInterval(secInterval);
+        clearInterval(secInterval.current);
     }, [showScore])
 
     useEffect(() => {
