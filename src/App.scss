@@ -1,7 +1,5 @@
 body {
-  // background-color: ;
-  background: rgb(255, 211, 196) url("./static/bgImage.png") no-repeat fixed
-    center;
+  background: rgb(255, 211, 196) url("./static/bgImage.png") no-repeat fixed center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,44 +18,95 @@ body {
   border-radius: 5px;
   padding: 20px;
   box-shadow: -1px 1px 34px -9px rgba(188, 97, 97, 0.75);
-  -webkit-box-shadow: -1px 1px 34px -9px rgba(188, 97, 97, 0.75);
-  -moz-box-shadow: -1px 1px 34px -9px rgba(188, 97, 97, 0.75);
   display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 20px;
-}
-.app2 {
-  background-color: rgb(255, 241, 250);
-  width: 450px;
-  min-height: 200px;
-  height: min-content;
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: -1px 1px 34px -9px rgba(188, 97, 97, 0.75);
-  -webkit-box-shadow: -1px 1px 34px -9px rgba(188, 97, 97, 0.75);
-  -moz-box-shadow: -1px 1px 34px -9px rgba(188, 97, 97, 0.75);
-  display: flex;
-  justify-content: space-evenly;
   margin-bottom: 20px;
   flex-direction: column;
-}
-.app3 {
-  background-color: rgb(255, 241, 250);
-  width: 450px;
-  min-height: 200px;
-  height: min-content;
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: -1px 1px 34px -9px rgba(188, 97, 97, 0.75);
-  -webkit-box-shadow: -1px 1px 34px -9px rgba(188, 97, 97, 0.75);
-  -moz-box-shadow: -1px 1px 34px -9px rgba(188, 97, 97, 0.75);
-  /*display: flex;*/
-  justify-content: space-evenly;
-  margin-bottom: 20px;
-  /*flex-direction: column;*/
-  input {
-    color: black;
+
+  &--header__section {
+    h3 {
+      font-size: 1.5rem;
+    }
   }
+
+  &--form__section {
+    margin: .5rem 0 0 0;
+
+    p {
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-family: "Rubik", sans-serif;
+    }
+
+    input {
+      border: 0.5px solid #ccb3b3;
+      width: 50%;
+      height: 35px;
+      font-family: "Rubik", sans-serif;
+      border-radius: 5px;
+      font-size: 1.25rem;
+
+      &:focus-visible {
+        border: 1px solid #ffcabe;
+        outline: none;
+      }
+    }
+
+    button {
+      margin: 0 0 10px 10px;
+      display: inline-block;
+      width: 200px;
+      height: 45px;
+      border-radius: 100px;
+      background-color: #f5c0c0;
+      color: black;
+      border: transparent;
+
+      &:hover {
+        background-color: #ffcabe;
+      }
+    }
+  }
+}
+
+.app--secondary {
+  @extend .app;
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    padding: 8px;
+  }
+
+  tr:first-child {
+
+    &:hover {
+      background-color: inherit;
+    }
+  }
+
+  tr:nth-child(even) {
+    background-color: #fedede;
+  }
+
+  tr:hover {
+    background-color: #ffcabe;
+  }
+
+  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    overflow: hidden;
+  }
+}
+
+.question--box {
+  @extend .app;
+  width: 600px;
+  flex-direction: row;
 }
 
 .score-section {
@@ -66,23 +115,29 @@ body {
   align-items: center;
 }
 
-/* QUESTION/TIMER/LEFT SECTION */
-.question-section {
-  width: 100%;
-  position: relative;
+.question {
+
+  &-section {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &-count {
+    margin-bottom: 20px;
+  }
+
+  &-count span {
+    font-size: 28px;
+  }
+
+  &-text {
+    margin-bottom: 12px;
+  }
 }
 
-.question-count {
-  margin-bottom: 20px;
-}
-
-.question-count span {
-  font-size: 28px;
-}
-
-.question-text {
-  margin-bottom: 12px;
-}
 
 .timer-text {
   background: rgb(230, 153, 12);
@@ -94,7 +149,6 @@ body {
   text-align: center;
 }
 
-/* ANSWERS/RIGHT SECTION */
 .answer-section {
   width: 100%;
   display: flex;
@@ -103,35 +157,21 @@ body {
 }
 
 button {
+  margin: 0 0 10px 10px;
+  border-radius: 100px;
+  background-color: #f5c0c0;
+  color: black;
+  border: transparent;
   width: 100%;
-  font-size: 16px;
-  color: #ffffff;
-  background-color: #252d4a;
-  border-radius: 15px;
+  font-size: 1rem;
   display: flex;
-  padding: 5px;
-  justify-content: flex-start;
-  align-items: center;
-  border: 5px solid #234668;
+  justify-content: center;
   cursor: pointer;
-}
+  height: 4.5rem;
+  padding: .5rem;
+  align-items: center;
 
-.correct {
-  background-color: #2f922f;
-}
-
-.incorrect {
-  background-color: #ff3333;
-}
-
-button:hover {
-  background-color: #555e7d;
-}
-
-button:focus {
-  outline: none;
-}
-
-button svg {
-  margin-right: 5px;
+  &:hover {
+    background-color: #ffcabe;
+  }
 }
