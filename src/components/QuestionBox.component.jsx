@@ -57,7 +57,7 @@ export default function MainBox(props) {
 
     useEffect(() => () => {
         clearInterval(secInterval);
-    })
+    }, [showScore])
 
     useEffect(() => {
         const get5RandomQuestions = async () => {
