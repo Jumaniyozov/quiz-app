@@ -80,8 +80,7 @@ body {
     padding: 8px;
   }
 
-  tr:first-child {
-
+  thead tr {
     &:hover {
       background-color: inherit;
     }

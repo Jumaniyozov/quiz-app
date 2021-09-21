@@ -23,12 +23,15 @@ export default function HomePage(props) {
                 <h1>Таблица лидеров</h1>
                 <div>
                     <table>
+                        <thead>
                         <tr>
                             <th>№</th>
                             <th>Имя</th>
                             <th>Очки</th>
                             <th>Время</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         {state.user.userList
                             .sort((first, second) => {
                                 if (first.score > second.score) {
@@ -42,7 +45,7 @@ export default function HomePage(props) {
                             .slice(0, 5)
                             .map((user, index) => {
                                 return (
-                                    <tr>
+                                    <tr key={index}>
                                         <td>{`${index + 1}`}</td>
                                         <td>{`${user.name}`}</td>
                                         <td>{`${user.score}`}</td>
@@ -50,6 +53,7 @@ export default function HomePage(props) {
                                     </tr>
                                 );
                             })}
+                        </tbody>
                     </table>
                     <ol></ol>
                 </div>

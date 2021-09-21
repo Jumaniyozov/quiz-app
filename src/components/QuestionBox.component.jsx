@@ -11,6 +11,7 @@ export default function MainBox(props) {
     const userState = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const AC = bindActionCreators(actionCreators, dispatch);
+    let secInterval = null;
 
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [showScore, setShowScore] = useState(false);
@@ -42,18 +43,21 @@ export default function MainBox(props) {
     };
 
     useEffect(() => {
-        setInterval(() => {
+        secInterval = setInterval(() => {
             setCurrSec((prevState) => prevState + 1);
         }, 1000);
     }, []);
 
     useEffect(() => {
-        console.log(currSec);
         if (currSec === 60) {
             setCurrMin((prevState) => prevState + 1);
             setCurrSec(0);
         }
     }, [currSec]);
+
+    useEffect(() => () => {
+        clearInterval(secInterval);
+    })
 
     useEffect(() => {
         const get5RandomQuestions = async () => {
